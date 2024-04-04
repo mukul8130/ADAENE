@@ -1,0 +1,297 @@
+<style>
+  *{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .sign_up .signup_box1 {
+    /* background-color: rgb(145, 252, 184); */
+    background-color: #131212f5 !important;
+    color: white;
+  }
+  .sign_up form .box{
+    min-width:200px;
+  }
+  .sign_up form .singnup_box button{
+    min-width: 440px;
+  }
+  
+  .sign_up form .singnup_box .box input:focus {
+    border-bottom: 2px solid red;
+  }
+
+  .sign_up form .singnup_box .sss1{
+    display: block;
+  }
+  .sign_up form .singnup_box .hhh1{
+    display: none;
+  }
+
+  
+
+  @media screen and (max-width:550px) {
+    .sign_up form .box{
+       min-width:auto;
+       width: 90%;
+    }
+    .sign_up form .singnup_box button{
+      min-width: auto;
+      width: 90% !important;
+    }
+    .sign_up form{
+      gap: 0;
+      padding:50px 20px;
+    }
+    .sign_up form .singnup_box{
+      flex-wrap: wrap;
+      width: 100%;
+      gap: 0px;
+
+    }
+    .sign_up form .singnup_box .box input{
+      margin-top: 30px;
+    }
+    .sign_up form .singnup_box .box .fa-solid{
+      top:40px;
+    }
+
+    .sign_up form .singnup_box .box .pass_icon{
+      top:40px;
+    }
+
+    .sign_up form .singnup_box button{
+       margin-top: 30px;
+    }
+  }
+
+  @media screen and (max-width:400px) {
+    .sign_up form .create{
+      font-size:25px;
+      letter-spacing: normal;
+    }
+    .sign_up .signup_box1 h2{
+      font-size: 20px;
+    }
+  }
+
+ 
+</style>
+
+{% extends './base.html' %} 
+{% block 'content' %}
+{% include './massages.html' %}
+<div class="sign_up flex md:flex-nowrap flex-wrap md:flex-row flex-col-reverse">
+  <div
+    class="signup_box1 py-10 md:py-24 md:w-1/3 w-full flex gap-1 justify-center items-center flex-col px-8"
+  >
+    <h2 class="wel text-2xl">Welcome Back</h2>
+    <p class="text-center">login with your personal info</p>
+    <a href="/login"
+      ><button
+        type="submit"
+        class="login_btn2 bg-gray-500 hover:border border-white p-2 md:pt-2 md:pb-3  md:px-4 rounded-md mt-2 hover:bg-black hover:text-white transition duration-1000 ease-in-out "
+      >
+        Sing in
+      </button>
+    </a>
+  </div>
+
+  <form method="post" action="" class="signup_box2  py-16 md:py-40 px-8 flex flex-col justify-center items-center gap-4 md:w-2/3 w-full " onsubmit="return signup()">
+  {% csrf_token %}  
+  <h1 class="create text-3xl lg:text-4xl font-medium tracking-widest text-center">Create Account </h1>
+     
+    
+    <div class="singnup_box flex justify-center gap-10 w-full ">
+      <div class="box relative w-1/4">
+        <i class="fa-solid fa-user absolute top-3 left-2"></i>
+        <input class=" w-full p-1 pl-8 text-xl outline-0 border-b-2 border-black" type="text" name="name" id="N" placeholder="Name" />
+        <p id="error1" class="mt-2 text-red-500 h-6 "></p>
+      </div>
+      <div class="box relative w-1/4">
+        <i class="fa-solid fa-address-book absolute top-3 left-2"></i>
+        <input class="w-full p-1 pl-8 text-xl outline-0 border-b-2 border-black" type="text" name="lastname" id="L" placeholder="Last Name" />
+        <p id="error2" class="mt-2 text-red-500 h-6 "></p>
+      </div>
+    </div>
+
+    <div class="singnup_box flex gap-10 justify-center w-full">
+        <div class="box relative w-1/4">
+          <i class="fa-solid fa-circle-user absolute top-3 left-2"></i>  
+          <input class="w-full p-1 pl-8 text-xl outline-0 border-b-2 border-black" type="text" name="username" id="U" placeholder="Username" />
+          <p id="error3" class="mt-2 text-red-500 h-6 "></p>
+        </div>
+        <div class="box relative w-1/4">
+          <i class="fa-solid fa-envelope absolute top-3 left-2"></i>
+          <input class="w-full p-1 pl-8 text-xl outline-0 border-b-2 border-black" type="Email" name="email" id="E" placeholder="Email" />
+          <p id="error4" class="mt-2 text-red-500 h-6 "></p>
+        </div>
+    </div>
+    
+    <div class="singnup_box flex gap-10 w-full justify-center">
+        <div class="box relative w-1/4">
+          <i class="fa-solid fa-unlock absolute top-3 left-2"></i>
+          <input class="w-full p-1 pl-8 text-xl outline-0 border-b-2 border-black" type="password" name="cp" id="C" placeholder="Create Password" />
+          <i class="fa-regular fa-eye-slash pass_icon sss1 absolute top-3 right-1 " onclick="ff1()"></i>
+          <i class="fa-regular fa-eye hhh1 pass_icon absolute top-3 right-1" onclick="ff2()"></i>
+          <p id="error5" class="mt-2 text-red-500 h-6 "></p>
+        </div>
+        <div class="box relative w-1/4">
+          <i class="fa-solid fa-lock absolute top-3 left-2"></i>
+          <input class="w-full p-1 pl-8 text-xl outline-0 border-b-2 border-black" type="password" name="rp" id="R" placeholder="Reapeat Password" />
+          <i class="fa-regular fa-eye-slash pass_icon sss1 absolute top-3 right-1" onclick="ff3()"></i>
+          <i class="fa-regular fa-eye hhh1 pass_icon absolute top-3 right-1" onclick="ff4()"></i>
+          <p id="error6" class="mt-2 text-red-500 h-6 "></p>
+        </div>
+      </div>
+
+      <div class="singnup_box flex gap-10 w-full justify-center">
+        <button type="submit" class=" bg-gray-500  p-2 font-medium rounded-md hover:bg-black text-white transition duration-1000 ease-in-out mt-3" style="width:54%;">Sign up</button>
+      </div>
+
+    
+  </form>
+</div>
+
+
+
+<script>
+
+  function ff1(){
+       var z=document.getElementsByClassName('sss1')[0]
+       var z1=document.getElementsByClassName('hhh1')[0]
+       var z2=document.getElementById("C")
+       if(z.classList.contains('sss1')){
+        z.classList.remove('sss1')
+        z.classList.add('hhh1')
+        z1.classList.add('sss1')
+        z1.classList.remove('hhh1')
+       }
+       z2.type='text'
+  }
+
+  function ff2(){
+       var z=document.getElementsByClassName('sss1')[0]
+       var z1=document.getElementsByClassName('hhh1')[0]
+       var z2=document.getElementById("C")
+       if(z.classList.contains('sss1')){
+        z.classList.remove('sss1')
+        z.classList.add('hhh1')
+        z1.classList.add('sss1')
+        z1.classList.remove('hhh1')
+       }
+       z2.type='password'
+  }
+
+
+  function ff3(){
+       var z=document.getElementsByClassName('sss1')[1]
+       var z1=document.getElementsByClassName('hhh1')[1]
+       var z2=document.getElementById("R")
+
+       if(z.classList.contains('sss1')){
+        z.classList.remove('sss1')
+        z.classList.add('hhh1')
+        z1.classList.add('sss1')
+        z1.classList.remove('hhh1')
+       }
+       z2.type='text'
+  }
+
+  function ff4(){
+       var z=document.getElementsByClassName('sss1')[1]
+       var z1=document.getElementsByClassName('hhh1')[1]
+       var z2=document.getElementById("R")
+
+       if(z.classList.contains('sss1')){
+        z.classList.remove('sss1')
+        z.classList.add('hhh1')
+        z1.classList.add('sss1')
+        z1.classList.remove('hhh1')
+       }
+       z2.type='password'
+  }
+  
+  function signup(){
+      var s1=document.getElementById('N').value
+      var s2=document.getElementById('L').value
+      var s3=document.getElementById('U').value
+      var s4=document.getElementById('E').value
+      var s5=document.getElementById('C').value
+      var s6=document.getElementById('R').value
+      var p1=document.getElementById('error1')
+      var p2=document.getElementById('error2')
+      var p3=document.getElementById('error3')
+      var p4=document.getElementById('error4')
+      var p5=document.getElementById('error5')
+      var p6=document.getElementById('error6')
+
+      var r1=1
+      var r2=1
+      var r3=1
+      var r4=1
+      var r5=1
+      var r6=1
+
+      if(s1==""){
+        p1.innerText='Please enter name *'
+        r1=0
+      }
+      else{
+        p1.innerText=""
+        r1=1
+      }
+
+      if(s2==""){
+        p2.innerText='Please enter last name *'
+        r2=0
+      }
+      else{
+        p2.innerText=""
+        r2=1
+      }
+
+      if(s3==""){
+        p3.innerText='Please enter username *'
+        r3=0
+      }
+      else{
+        p3.innerText=""
+        r3=1
+      }
+
+
+      if(s4==""){
+        p4.innerText='Please enter email *'
+        r4=0
+      }
+      else{
+        p4.innerText=""
+        r4=1
+      }
+
+      if(s5==""){
+        p5.innerText='Please enter create password  *'
+        r5=0
+      }
+      else{
+        p5.innerText=""
+        r5=1
+      }
+
+      if(s6==""){
+        p6.innerText='Please enter reapeat password *'
+        r6=0
+      }
+      else{
+        p6.innerText=""
+        r6=1
+      }
+
+      if(r1==1 && r2==1 && r3==1 && r4==1 && r5==1 && r6==1){
+        return true
+      }
+      else{
+        return false
+      }
+  }
+</script>
+
+{% endblock %}

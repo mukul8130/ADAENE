@@ -1,0 +1,417 @@
+<style>
+    @media screen and (max-width:500px) {
+        main .container1 .container_details h1{
+            font-size:25px;
+            margin-bottom: 15px;
+        }
+        main .container1 .container_details a{
+            font-size: 20px;
+            padding: 10px 5px;
+            width: 140px;
+        }
+        main .container2 .container_box h1{
+           font-size: 25px;
+        }
+        .container5 .con5 h2{
+            font-size: 22px
+        }
+        .container6 .con6_r h1{
+            font-size: 22px;
+        }
+        
+    }
+
+    @media screen and (max-width:450px){
+        .container5 .con5{
+            padding: 20px 20px;
+        }
+        .container5 .con5 p{
+            font-size: 12px;
+        }
+        .container5 .con5 h2{
+            margin-bottom: 5px;
+        }
+        .container6 .con6_r p{
+            padding: 0px;
+            font-size: 12px;
+        }
+        .container7{
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .container7 .con7_h1{
+            font-size: 22px;
+        }
+        .container7 .con7_h2{
+            font-size: 16px;
+        }
+        .container7 .con7_h3{
+            margin-top: 5px;
+            font-size: 16px;
+        }
+        .container7 .con7_inp{
+            width: 80%;
+        }
+    }
+
+    @media screen and (max-width:400px) {
+        .container3 .container3_box .h2{
+            font-size: 18px;
+        }
+    }
+    @media screen and (max-width:350px) {
+        main .container1 .container_details h1{
+            font-size:20px ;
+        }
+        main .container1 .container_details a {
+            font-size: 16px;
+            padding: 4px 0px;
+            width: 120px;
+        }
+        main .container2 .container_box h1{
+           font-size: 20px;
+           margin-bottom:20px;
+        }
+        main .container2 .container_box a{
+            font-size: 15px;
+            padding:8px 15px;
+            /* width: 120px; */
+        }
+        .container3 .container3_box .h22{
+            font-size: 20px;
+        }
+        .container4 .con4_box1 h1{
+            font-size: 20px;
+        }
+        .container4 .con4_box1 p{
+            font-size:15px;
+            margin-top:0px ;
+        }
+        .container4 .con4 a{
+            bottom: -15px;
+        }
+        .container5 .con5 h2{
+            font-size: 17px;
+            margin-bottom: 0px;
+        }
+    }
+
+    @media screen and (max-width:300px) {
+        main .container1 .container_details h1{
+            font-size:16px;
+        }
+        .container3 .container3_box .h2{
+            font-size: 15px;
+        }
+        .container5 .con5 p{
+            font-size: 10px;
+        }
+
+        .container7 .con7_h1{
+            font-size:18px;
+        }
+        .container7 .con7_h2{
+            font-size:13px;
+        }
+        .container7 .con7_h3{
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .container7 .con7_inp{
+            width: 90%;
+        }
+        
+    }
+
+    @media screen and (max-width:250px) {
+        .container6{
+            padding: 20px;
+        }
+    }
+
+    .container3_box{
+        overflow: hidden;
+        position: relative;
+    }
+    .container3_box:hover img{
+        transform: scale(1.1);
+        transition: all 0.5s ease-in-out;
+    }
+    .container3_box h2{
+        /* display: none; */
+    }
+    .container3_box:hover h2{
+        background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+        /* display: flex; */
+    }
+    .container4  .con4_box2 a{
+        display: none;
+    }
+    .container4  .con4:hover .con4_d1{
+        display: none ;
+    }
+    .container4  .con4:hover  a{
+        display: block;
+    }
+    .container4 .con4 a:hover{
+        border:2px solid brown;
+        /* color:brown; */
+    }
+    .container5 .con5{
+        background-color: rgba(6, 1, 1, 0.589);
+    }
+
+    .container7{
+        background-color: rgb(20 20 20) !important;
+    }
+
+    header{
+    background-color: black;
+    }
+    header  form input{
+    background-color: black;
+    }
+    
+</style>
+
+{% extends './base.html' %}
+
+{% block 'content' %}
+
+
+{% include './massages.html' %}
+<main class="">
+    <div class="container1 w-full relative z-0">
+        <img src="/static/static_image/84770f_93b300330b3742f2b1948ef292a91f27~mv2_d_1920_1279_s_2.webp" alt="" class="w-full">
+        <div class="container_details absolute top-0 w-full h-full flex justify-center items-center flex-col text-center">
+            <h1 class=" font-medium mb-8 text-white text-3xl  md:text-5xl"  data-aos="fade-up">PLAN YOUR ADVENTURE</h1>
+            <a href="/shop" class="border-2 p-4 w-48 text-white text-xl md:text-2xl font-medium transition duration-1000 ease-in-out hover:bg-white hover:text-black " data-aos="fade-right">SHOP NOW</a>
+        </div>
+    </div>
+
+    <div class="container2  sm:flex-row flex-wrap sm:flex-nowrap flex justify-center items-center bg-black text-center">
+        <div class="container_box w-full sm:w-2/4  text-white py-14 sm:p-0 "  data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl mb-10" data-aos="zoom-in">NEW ARRIVALS</h1>
+            <a href="/shop" class="text-lg md:text-xl lg:text-2xl border-2 py-3 px-5 hover:bg-white hover:text-black" >SHOP NOW</a>
+        </div>
+        <div class="container_box w-full sm:w-2/4 "  data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500">
+            <img src="/static/static_image/product1.webp"  alt="">
+        </div>
+    </div>
+
+    <div class="container3 flex md:flex-nowrap flex-wrap">
+        <a href="/shop/category/Backpacks" class="container3_box md:w-1/3 w-2/4 cursor-pointer" data-aos="flip-left">
+            <img src="/static/static_image/bg_img1.webp " alt="">
+            <h2 class="h2 absolute top-0 text-white w-full h-full flex justify-center items-center  text-2xl font-medium">BACKPACKS</h2>
+        </a>
+        <a href="/shop/category/Duffle%20Bags" class="container3_box bg-green-500 md:w-1/3 w-2/4 cursor-pointer" data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000">
+            <img src="/static/static_image/bg_img2.webp" alt="">
+            <h2 class="h2 absolute top-0 w-full h-full flex justify-center items-center text-white text-2xl font-medium">DUFFLE BAGS</h2>
+        </a>
+        <a href="/shop/category/Travel%20Packs" class="container3_box bg-yellow-500 md:w-1/3 w-full cursor-pointer" data-aos="flip-right">
+            <img src="/static/static_image/bg_img3.webp" alt="">
+            <h2 class="h22 absolute top-0 text-white w-full h-full flex justify-center items-center text-2xl font-medium">TRAVEL PACKS</h2>
+        </a>
+    </div>
+
+    <div class="container4">
+        
+        <div class="con4_box1  px-8 md:pt-20 py-10 border-b-2 border-b-rose-400 bg-black box-border text-white text-center">
+         <h1 class="text-3xl lg:text-5xl font-medium" data-aos="zoom-in">NOW ON SALE</h1>
+         <p class="text-xl sm:text-2xl mt-2" data-aos="zoom-out">UP TO 50% OFF</p>
+        </div>
+
+
+        <div class="con4_box2 flex-wrap md:flex-nowrap flex w-full bg-black pb-20 justify-center md:gap-0 gap-5 ">
+
+            
+            <div class="con4 text-white text-center hover:cursor-pointer relative flex justify-center items-center flex-col "  data-aos="flip-left">
+               <div class="img">
+                <img src="/static/static_image/bag1.webp" alt="">
+               </div>
+               <div class="con4_d1">
+               <h2>FATMUG BACKPACK</h2>
+               <p><del>$75.00 </del> &nbsp; &nbsp; $67.50</p>
+               </div>
+               <a href="product_page/1" class="text-white border-2 border-white p-2 absolute bottom-0">View Details</a>
+            </div>
+
+
+            <div class="con4  text-white text-center hover:cursor-pointer relative flex justify-center items-center flex-col" data-aos="flip-up">
+                <div class="img">
+                <img src="/static/static_image/bag2.webp" alt="">
+                </div>
+                <div class="con4_d1">
+                <h2>PINBOLL PACK</h2>
+                <p><del>$130 </del> &nbsp; &nbsp; $104.00</p>
+                </div>
+                <a href="product_page/16" class="text-white border-2 border-white p-2 absolute bottom-0">View Details</a>
+            </div>
+
+            
+            <div class="con4 text-white text-center hover:cursor-pointer relative flex justify-center items-center flex-col" data-aos="flip-right">
+                <div class="img">
+                    <img src="/static/static_image/bag3.webp" alt="">
+                </div>
+                <div class="con4_d1">
+                <h2>ZAINTO BACKPACK</h2>
+                <p><del>95.00 </del> &nbsp; &nbsp; $76.00</p>
+                </div>
+                <a href="product_page/6" class="text-white border-2 border-white p-2 absolute bottom-0 ">View Details</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container5 relative  bg-black" id="about">
+        <img class="img_con5" src="/static/static_image/full_img.webp" alt="">
+        <div class="con5 md:w-2/4  px-8 text-center absolute top-0 h-full flex justify-center items-center flex-col text-white">
+            <!-- <img src="/static/static_image/full_img.webp" alt=""> -->
+            <h2 class="text-2xl md:text-4xl font-medium  mb-4" data-aos="zoom-in" >ABOUT US</h2>
+            <p data-aos="zoom-in-up">I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font.</p>
+        </div>
+    </div>
+
+    <div class="container6 bg-black p-8 flex flex-wrap flex-col-reverse sm:flex-row sm:flex-nowrap ">
+       
+        <form method="post" action="/sendmsg/" class="con6_l w-full sm:w-1/2 bg-black flex justify-center items-center text-white" data-aos="fade-down">
+        {% csrf_token %}    
+            <div class="con6_box flex flex-col gap-3 w-11/12 bg-black">
+             
+            <div class="first_box flex md:flex-nowrap flex-wrap w-full md:gap-0 gap-3">    
+            <div class="box w-full md:w-1/2">
+                <label for="" >First Name *</label>
+                <br>
+                <input type="text" class="mt-2 p-2 w-full bg-black border-2" name="fn" id="" required>
+            </div>
+
+            <div class="box md:ml-5  w-full md:w-1/2">
+                <label for="" >Last Name *</label>
+                <br>
+                <input type="text" class="mt-2 p-2 w-full bg-black border-2" name="ln" id="" required>
+            </div>
+            </div>
+
+            <div class="box">
+                <label for="">Enter Your Email</label>
+                <br>
+                <input class="mt-2 p-2 w-full bg-black border-2" type="email" name="em" id="" required>
+            </div>
+
+            <div class="box">
+                <label for="">Enter Your Subject</label>
+                <br>
+                <input class="mt-2 p-2 w-full bg-black border-2" type="text" name="sub" id="" required>
+            </div>
+
+            <div class="box">
+                <label for="">Enter Your Message</label>
+                <br>
+                <textarea class="mt-2 w-full resize-none bg-black border-2 p-2" name="msg" id="" cols="40" rows="5" required></textarea>
+            </div>
+
+            <div class="box text-right">
+                <input type="reset" value="Cancel" class="border-2 hover:border-red-500 hover:text-gray-500 cursor-pointer border-white py-2 px-5 transition duration-300 ease-in-out">
+                <input type="submit" name="" id="" value="Send" class="border-2 hover:border-red-500 hover:text-gray-500 cursor-pointer border-white py-2 px-5 transition duration-300 ease-in-out">
+            </div>
+
+        </div>
+       </form>
+
+       <div class="con6_r text-white w-full sm:w-1/2 " id="contact">
+        <h1 class="text-2xl text-center font-medium mb-2 tracking-widest" data-aos="fade-down-left">CONTECT</h1>
+        <p class="text-center md:text-xl px-10" data-aos="fade-down-left">I'm a paragraph. Click here to add your own text and edit me. I’m a great place for you to tell a story and let your users know a little more about you.</p>
+        <h3 class="text-center my-4">info@my-domain.com <br>
+            Tel: 1-800-000-0000
+        </h3>
+       </div>
+
+    </div>
+
+    {% if user.username == 'root' %}
+  
+    <form method="post" action="/send_msg_users/" class="container7 py-10 flex justify-center items-center flex-col gap-2 text-white bg-black " onsubmit="return xr1()">
+    {% csrf_token %}
+            <h1  class="con7_h1 font-mono text-2xl md:text-3xl text-center">ENTER THE MSG FOR YOUR USERS</h1>
+            <h2 class="con7_h2 text-xl md:text-2xl text-center">AND NEVER MISS AN UPDATE</h2>
+            <h3 class="con7_h3 text-2xl mt-6">Enter your msg here *</h3>
+            <input class="con7_inp p-2 bg-black w-1/2 md:w-2/5 text-center border-2" type="text" name="msg" id="">
+            <p id="e_error" class="text-red-500"></p>
+            <button type="submit" class="con7_inp bg-black text-white border-2 w-1/2 md:w-2/5 p-2 font-medium">SEND NOW</button>
+    </form>
+    
+ 
+    {% else %}
+    <form method="post" action="/emailmsg/" class="container7 py-10 flex justify-center items-center flex-col gap-2 text-white bg-black " onsubmit="return xr()">
+    {% csrf_token %}
+        <h1  class="con7_h1 font-mono text-3xl md:text-5xl">JOIN OUR MAILING LIST</h1>
+        <h2 class="con7_h2 text-xl md:text-2xl">AND NEVER MISS AN UPDATE</h2>
+        <h3 class="con7_h3 text-2xl mt-6">Enter your email here *</h3>
+        <input class="con7_inp p-2 bg-black w-1/2 md:w-2/5 text-center border-2" type="email" name="EMAIL" id="">
+        <p id="e_error" class="text-red-500"></p>
+        <button type="submit" class="con7_inp bg-black text-white border-2 w-1/2 md:w-2/5 p-2 font-medium">SUBSCRIBE NOW</button>
+    </form>
+
+    {% endif %}
+
+    
+    
+</main>
+
+
+<script>
+  function xr(){
+    var e=document.getElementsByClassName('con7_inp')[0].value
+    var e1=document.getElementById("e_error")
+    var x=0
+    if(e==''){
+        e1.innerText='Please enter the email *'
+        var x=1
+    }
+    else{
+        e1.innerText=""
+        var x=0
+    }
+
+
+    if(x==1){
+        return false
+    }
+    else{
+        return true
+    }
+  }
+
+
+  function xr1(){
+    var e=document.getElementsByClassName('con7_inp')[0].value
+    var e1=document.getElementById("e_error")
+    var x=0
+    if(e==''){
+        e1.innerText='Please Enter The Msg *'
+        var x=1
+    }
+    else{
+        e1.innerText=""
+        var x=0
+    }
+
+
+    if(x==1){
+        return false
+    }
+    else{
+        return true
+    }
+  }
+</script>
+
+
+
+{% endblock %}

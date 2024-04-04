@@ -1,0 +1,293 @@
+<style>
+    .header_cart{
+        width:25%;
+        min-width: 350px;
+    }
+    .header_cart .header_cart_total{
+        width:100%;
+        /* min-width: 350px; */
+    }
+    .header_cart .cart_h_d .cart_h_box .img{
+        width:150px;   
+    }
+    .header_cart .cart_h_d .cart_h_box .img img{
+        width:150px;   
+    }
+    .header_cart::-webkit-scrollbar {
+     display: none; 
+    }
+    .cart_h_d::-webkit-scrollbar {
+     display: none; 
+    }
+
+    .header_cart  .header_cart_remove{
+        display: none;
+    }
+
+    .hide_cart{
+        transform: translateX(100%);
+        transition: all 0.7s ease-in-out;
+    }
+
+    .show_cart{
+        transform: translateX(0%);
+        transition: all 0.7s ease-in-out;
+    }
+
+    @media screen and (max-width:500px) {
+    .header_cart{
+        width:100%;
+        min-width:auto;
+    }
+    .header_cart .header_cart_total{
+        width:100%;
+        min-width:auto;
+    }
+    }
+
+    @media screen and (max-width:450px) {
+       .header_cart .header_cart_total{
+        font-size: 20px;
+       }
+    }
+
+    @media screen and (max-width:350px) {
+        .header_cart{
+            background-color: black;
+        }
+        .header_cart .cart_h_d .cart_h_box .img{
+        width:auto;
+        display: flex;
+        justify-content: center;   
+        border-bottom: 1px solid gray;
+        }
+        .header_cart .cart_h_d .cart_h_box .img img{
+        width:70%;   
+        min-width: 150px;
+        }   
+
+        .header_cart .cart_h_d .cart_h_box{
+            flex-wrap: wrap;
+        }
+        .header_cart .cart_h_d .cart_h_box .img_data{
+            width: 100%;
+        }
+
+        .header_cart .cart_h_d .cart_h_box .header_cart_icon{
+            display: none;
+        }
+
+        .header_cart  .header_cart_remove{
+        display:block;
+    }
+
+    }
+
+    @media screen and (max-width:230px) {
+       .header_cart .header_cart_total{
+        font-size:17px;
+       }
+    }
+
+    @media screen and (max-width:200px) {
+        .header_cart .cart_h_d .cart_h_box .img img{
+        width:90%;   
+        min-width: auto;
+        }   
+    }
+</style>
+
+
+<header class=" bg-black  text-white flex p-8  justify-between flex-wrap md:flex-nowrap ">
+    <div class="logo order-1 md:-order-none">
+        <a href="/"><span class="text-gray-400 text-3xl font-medium">THE</span><span class="text-white text-3xl font-medium active">NORTHPOLE</span></a>
+    </div>
+
+    <form class="src relative  w-full  m-0 mt-2 block md:hidden order-3 md:-order-none">
+        <input class="p-1 pb-2  outline-none  border-b-2 border-gray-400  w-full placeholder:font-medium  text-white" type="search" name="" id="" placeholder="SEARCH..." >
+        <button type="submit" class="absolute text-gray-400 right-1 top-2  bg-black"><i class="fa-solid fa-magnifying-glass "></i></button>
+    </form>
+
+    <nav class="flex justify-end align-middle  text-center md:w-10/12 order-2 md:-order-none">
+        <ul class="justify-center align-middle text-center gap-7 text-lg font-medium mx-4 text-gray-400 flex hide " id="ul">
+            <li class="transition duration-500 ease-in-out relative li"><a href="/shop" class=" hover:text-white fa1 ">SHOP</a>
+            <ol class="absolute z-10 flex-col gap-3 top-8   hidden bg-black pt-10 p-4 w-max   lg:text-sm rounded">
+                {% for i in cat_name %}
+                <li class="hover:text-white transition duration-500 ease-in-out"><a href="/shop/category/{{i.category_name}}">{{i.category_name}}</a></li>
+                {% endfor %}
+                <!-- <li class="hover:text-white transition duration-500 ease-in-out"><a href="">DUFFLE BAGS</a></li>
+                <li class="hover:text-white transition duration-500 ease-in-out"><a href="">TRAVEL PACKS</a></li>
+                <li class="hover:text-white transition duration-500 ease-in-out"><a href="">GIFT CARD</a></li> -->
+            </ol>
+            </li>
+            <li class="transition duration-500 ease-in-out hover:text-white fa1"><a href="#about">ABOUT</a></li>
+            <li class="transition duration-500 ease-in-out hover:text-white fa1"><a href="">GROUPS</a></li>
+            <li class="transition duration-500 ease-in-out hover:text-white fa1"><a href="#contact">CONTACT</a></li>
+
+            <div class="cross text-2xl text-gray-400 lg:hidden absolute top-5 right-10" onclick="f2()">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </ul>
+
+        <form class="src relative  lg:w-3/12 sm:w-1/2  ml-4 mr-8 hidden md:block">
+            <input class="p-1 pb-2  outline-none  border-b-2 border-gray-400   w-full placeholder:font-medium  text-white " type="search" name="" id="" placeholder="SEARCH..." >
+            <button type="submit" class="absolute text-gray-400 right-1 top-2  bg-black"><i class="fa-solid fa-magnifying-glass sr_icon"></i></button>
+        </form>
+
+        {% if user.id %}
+        <div class="login">
+            <a href="" class="text-xl mr-2 text-gray-400 hover:text-white transition-all duration-500 ease-in-out">{{user.username}} |</a>
+            <a href="/logout" class="text-xl mr-2 text-gray-400 hover:text-white transition-all duration-500 ease-in-out">Logout</a>
+        </div>
+
+        {% else %}
+
+        <div class="login">
+            <a href="/sign_up"><i class="fa-solid fa-circle-user text-2xl mr-2 text-gray-400 hover:text-white transition-all duration-500 ease-in-out cursor-pointer"></i> </a>
+            <a href="/login" class="text-xl mr-2 text-gray-400 hover:text-white transition-all duration-500 ease-in-out">Login</a>
+        </div>
+
+        {% endif %}
+
+        <div class="cart relative ml-2">
+            <a onclick="header_cart()" ><i class="fa-solid fa-cart-shopping text-xl text-gray-400 hover:text-white transition-all duration-500 ease-in-out cursor-pointer"></i></a>
+            <span class="absolute bottom-7 text-xl ">{{count_product}}</span>
+        </div>
+
+        <div class="toggle ml-8 text-xl text-gray-400  lg:hidden" onclick="f1()">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </div>
+    </nav>
+</header>
+
+
+
+<div class="header_cart  fixed top-0 right-0 z-20  h-screen hide_cart overflow-y-scroll" id="header_cart">
+ 
+    <!-- ######################### -->
+
+    <div class="cart_h p-4 bg-white flex  justify-between sticky top-0">
+        <i class="fa-solid fa-chevron-right text-2xl hover:cursor-pointer" onclick="header_cart1()"></i>
+        <h2 class="text-black bg-white  text-3xl ">Cart</h2>
+        <div></div>
+    </div>
+
+    <!-- ######################### -->
+
+    
+
+    <div class="cart_h_d bg-black h-screen overflow-y-scroll p-5">
+
+        
+
+        
+        {% if user.id %}
+
+        {% if cd %}
+        
+        {% for i in cd %}
+        <div class="cart_h_box  flex gap-4 border-y border-gray-500 mb-5 py-4 text-white">
+        <div class="img">
+            <img src="{{i.pt.image.url}}" alt="">
+        </div>
+        <div class="img_data flex flex-col gap-2">
+            <p class="text-xl">{{i.pt.product_name}}</p>
+
+            {% if i.vt.all %}
+                {% for x in i.vt.all %}
+                    <p>{{x.variation_category | title}} : {{x.variation_value | title}}</p>
+                {% endfor %}
+            {% endif %}
+
+            <p>$ {{i.pt.price}}</p>
+            <p>$ {{i.get_total}}</p>
+            
+            <div class="cart_pb flex  items-start mt-2">
+                <a href="/minus_btn/{{i.id}}" class="p-1 px-2 border  border-white border-r-0 hover:bg-black hover:text-white transition-all duration-500 ease-in-out"><i class="fa-solid fa-minus"></i></a>
+                <p class="px-2  border border-white border-r-0">{{i.q}}</p>
+                <a href="/plus_btn/{{i.id}}" class="p-1 px-2 border border-white hover:bg-black hover:text-white transition-all duration-500 ease-in-out"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+        <a href="/remove_btn/{{i.id}}" class="ml-auto"><i class="fa-solid fa-xmark ml-auto hover:cursor-pointer header_cart_icon"></i></a>
+        <a href="/remove_btn/{{i.id}}" class="w-full bg-gray-500 text-center pt-1 pb-2 header_cart_remove" >Remove</a>
+        </div>
+        {% endfor %}
+
+        {% else %}
+
+        <div class="none_cart flex justify-center items-center flex-col gap-5">
+            <h1 class="text-white text-center text-2xl">Your Cart Is Empty</h1>
+            <a href="/shop" class="bg-gray-500  p-2 text-white hover:bg-black hover:border border-white  transition-all duration-500 ease-in-out font-medium rounded-md">Continue Shopping</a>
+        </div>
+
+        {% endif %}
+
+        {% else %}
+
+        <div class="else flex flex-col justify-center items-center gap-4">
+        <h1 class="text-white text-center text-xl">Please Login And Add Items</h1>
+        <a href="/login" class="bg-gray-500 px-3 py-2 text-white rounded-md hover:bg-black hover:border border-white  transition-all duration-500 ease-in-out">Login</a>
+        </div>
+
+        {% endif %}
+
+
+
+
+
+    </div>
+
+    <!-- ########################## -->
+    <div class="header_cart_total bg-black text-white text-xl p-4 py-4 flex flex-col gap-2 z-20 sticky bottom-0 w-full">
+        <p>Subtotal : $ {{total}}</p>
+        <p>Tax : $ {{tax}}</p>
+        <p>Grand Total : $ {{grand_total}}</p>
+        <a href="/cart_page" class="bg-gray-500 w-full text-center pb-2 pt-1 hover:bg-black hover:border border-white transition-all duration-500 ease-in-out">View Cart</a>
+    </div>
+
+    <!-- ######################### -->
+
+    
+
+</div>
+
+<script>
+    function f1(){
+        var x=document.getElementById("ul")
+        if(x.classList.contains('hide')){
+            x.classList.remove('hide')
+            x.classList.add('show')
+        }
+    }
+    function f2(){
+        var x=document.getElementById("ul")
+        if(x.classList.contains('show')){
+            x.classList.remove("show")
+            x.classList.add("hide")
+        }
+    }
+
+    document.querySelectorAll('.fa1').forEach(function(elem){
+        elem.addEventListener('click',function(e){
+            x=document.querySelector('.active')
+            x.classList.remove('active')
+            e.target.parentElement.classList.add('active')
+        })
+    })
+
+    function header_cart(){
+        var d=document.getElementById('header_cart')
+        if(d.classList.contains('hide_cart')){
+            d.classList.remove('hide_cart')
+            d.classList.add('show_cart')
+        }
+    }
+
+    function header_cart1(){
+        var d=document.getElementById('header_cart')
+        if(d.classList.contains('show_cart')){
+            d.classList.remove('show_cart')
+            d.classList.add('hide_cart')
+        }
+    }
+</script>

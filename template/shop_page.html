@@ -1,0 +1,169 @@
+<style>
+    @media screen and (max-width:768px) {
+        .shop .sl_side ul{
+            position:fixed;
+            bottom: 0;
+            height:45vh;
+            width: 100%;
+            /* background-color: black; */
+            background-color: #131212f5 !important;
+            color: white;
+            display: flex;
+            left: 0%;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction:column;
+            z-index: 20;
+        }
+       .h1{
+            /* display: none; */
+            transform: translateX(-150%) !important;
+            background-color: aqua;
+            transition: all 0.5s ease-in-out;
+        }
+        .s1{
+            transform: translateX(0%);
+            /* display: block; */
+            transition: all 0.5s ease-in-out;
+
+        }
+    }
+    @media screen and (max-width:550px){
+        .h3{
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+        }
+        .shop{
+            padding: 20px !important;
+        }
+        .product_images .img_box{
+            width: 45% !important;
+        }
+    }
+
+    @media screen and (max-width:350px) {
+        .shop .sl_side {
+            display: block !important;
+        }
+        .shop .sl_side .filter-container{
+            margin-top: 10px;
+        }
+
+    }
+
+    .h3{
+        border-bottom: 1px solid gray;
+    }
+    header{
+    background-color: #131212f5 !important;
+    }
+    header  form input{
+    background-color:transparent !important ;
+    }
+
+    header  form .sr_icon{
+    background-color:#131212f5 !important;
+    /* background-color: red !important; */
+    }
+
+    footer{
+    background-color: #131212f5 !important;
+    }
+
+</style>
+{% extends './base.html' %}
+
+{% block 'content' %}
+
+{% include './massages.html' %}
+
+{% if x %}
+<h3 class="h3 text-lg text-white px-8 py-4 bg-black "><a href="/">Home</a> <i class="fa-solid fa-angle-right"></i> {{x}}</h3>
+{% else %}
+<h3 class="h3 text-lg text-white px-8 py-4 bg-black "><a href="/">Home</a> <i class="fa-solid fa-angle-right"></i> All Products</h3>
+{% endif %}
+
+<div class="shop px-8 py-5 lg:pb-28 pb-10 md:flex-nowrap flex-wrap  flex bg-black">
+
+    <div class="sl_side  w-full md:w-1/5 md:flex-nowrap md:block flex  justify-between md:border-none  border-b-2 border-gray-500">
+      <h2 class="pb-3 md:border-b-2 border-gray-400 text-white text-xl font-medium" onclick="w1()">Browse by <i class="fa-solid fa-angles-right md:hidden"></i></h2>
+      <ul class="mt-3 browse_by h1 md:text-base text-xl text-white" id="ull" data-aos="fade-down">
+        <i class="fa-solid fa-circle-chevron-left md:hidden absolute right-6 top-5 text-2xl text-gray-500 s1" onclick="w2()"></i>
+        <a href="/shop" class="md:mb-0 mb-2 md:text-start text-center">All Product</a>
+        {% for i in cat_name %}
+        <a class="mb-2" href="/shop/category/{{i.category_name}}"><li class="list-none md:text-start text-center">{{i.category_name}}</li></a>
+        {% endfor %}
+      </ul>
+ 
+       <form method="post" action="/filter_price/" class="filter-container mb-3 md:mt-5">
+       {% csrf_token %} 
+        <label for="rangeInput" class="pb-3 mt-10 border-b-2 border-gray-400 text-xl text-white font-medium">Filter by Price:</label>
+        <br>
+        <input class="mt-2 rounded-lg border-none outline-0" type="range" id="rangeInput" min="0" max="999" name="Max" value="500" step="1" />
+        <p class="inline-block text-white" id="rangeValue">$500</p>
+        <br>
+        <a href=""><button type="submit" class="border border-gray-500 text-white px-2 py-1 my-2 hover:border-red-500 rounded">Submit</button></a>
+       </form>
+
+    </div>
+
+    <div class="rl_side md:pl-5  font-medium w-full md:w-4/5 md:mt-0 mt-4 ">
+        {% if x %}
+        <h1 class="text-white text-3xl text-center md:text-start md:text-4xl ">{{x}}</h1>
+        {% else %}
+        <h1 class="text-white text-3xl text-center md:text-start md:text-4xl ">All Products</h1>
+        {% endif %}
+
+        <p class="text-base mt-3 text-center md:text-start md:w-11/12 lg:w-4/5 text-white">This is your category description. It’s a great place to tell customers what this category is about, connect with your audience and draw attention to your products.</p>
+        
+        {% if x %}
+        <p class="text-white mt-5 text-sm font-normal">{{cat_pro_qun}} Products</p>
+        {% elif f_price_pro_qun %}
+        <p class="text-white mt-5 text-sm font-normal">{{f_price_pro_qun}} Products</p>
+        {% else %}
+        <p class="text-white mt-5 text-sm font-normal">{{total_pro_qun}} Products</p>
+        {% endif %}
+
+        <div class="product_images w-full flex flex-wrap justify-between gap-5 mt-8 text-center text-lg text-white">
+            {% for i in ptd %}
+            <a href="/product_page/{{i.id}}" class="img_box w-5/12" data-aos="fade-up">
+                <img class="w-full" src="{{i.image.url}}" alt="">
+                <p>{{i.product_name}}</p>
+                <p>$ {{i.price}}</p>
+            </a>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function w1(){
+        var x=document.getElementById("ull")
+        console.log('w1')
+        if(x.classList.contains('h1')){
+            x.classList.remove('h1')
+            x.classList.add('s1')
+        }
+    }
+    function w2(){
+        console.log('w2')
+        var x=document.getElementById("ull")
+        if(x.classList.contains('s1')){
+            x.classList.remove('s1')
+            x.classList.add('h1')
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var rangeInput = document.getElementById("rangeInput");
+        var rangeValue = document.getElementById("rangeValue");
+
+        rangeInput.addEventListener("input", function () {
+          rangeValue.textContent = "$" + rangeInput.value;
+          filterData(rangeInput.value);
+        });
+      });
+</script>
+{% endblock %}

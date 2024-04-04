@@ -1,0 +1,224 @@
+<style>
+    *{
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+    }
+    
+    .login .inp_login{
+        min-width: 250px ;
+        border: 1px solid black;
+    }
+    .login .inp_pss{
+        min-width: 250px;
+    }
+    .login .login_btn{
+        min-width: 250px;
+    }   
+    
+    .login .login_box1 .login_logo{
+        background-color:grey;
+        color:white;
+        font-weight:lighter;
+        /* color: black; */
+        font-size: 20px !important;
+        padding:6px;
+        border-radius:50px;
+    }
+
+    .login .login_box2{
+        /* background-color:rgb(145, 252, 184) ; */
+        background-color: #131212f5 !important;
+        /* background-color: #232222f5 !important; */
+        color: white;
+    }
+
+    .login .ss1{
+        display:block;
+    }
+    .login .hh1{
+        display:none;
+    }
+
+    @media screen and (min-width:1024px) {
+        .login .login_box1{
+            padding-top: 130px;
+        }
+    }
+
+    @media screen and (max-width:768px) {
+        .login_btn2{
+            min-width:200px;
+        }
+        
+        .login .login_box2{
+            padding:20px;
+        }
+    }
+
+    @media screen and (max-width:550px) {
+        .login .login_box1{
+            padding: 30px 20px;
+        }
+
+    }
+
+    @media screen and (max-width:500px) {
+        .login .login_box1 h1{
+            font-size:27px;
+            letter-spacing: normal;
+        }
+        
+    }
+
+    @media screen and (max-width:350px) {
+        .login .inp_login{
+            min-width: auto;
+            width:100% !important;
+        }
+        .login .login_btn{
+            min-width: auto;
+            width: 100% ;
+        }
+        .login .inp_pss{
+            min-width: auto;
+            width: 100% !important;
+            text-align: center;
+        }
+        .login .inp_pss input{
+            width:100% !important;
+        }
+        .login button{
+            min-width: auto;
+            width: 90% !important;
+        }
+
+        .login_btn2{
+            min-width:100px !important;
+            /* width: 100% !important; */
+        }
+        
+    }
+
+    @media screen and (max-width:320px) {
+        .login{
+            gap:5px;
+        }
+        .login .login_box1 h1{
+            font-size: 22px;
+        }
+        .login .login_box1 p{
+            font-size: 15px;
+        }
+        .login .login_box2 h2{
+            font-size: 22px;
+        }
+        /* .login .login_box1 .log_logos{
+            font-size:20px;
+        } */
+    }
+</style>
+{% extends './base.html' %}
+
+
+{% block 'content' %}
+{% include './massages.html' %}
+<div class="login flex md:flex-nowrap flex-wrap ">
+<form method="post"  class="login_box1 flex px-8 md:py-24 py-10 flex-col  md:w-2/3 w-full justify-center items-center gap-3  bg-white " onsubmit="return form()">
+{% csrf_token %}
+<h1 class="text-3xl lg:text-4xl font-medium tracking-widest text-center">Login to Your Account </h1>
+<p class="text-xl text-center">Login using social networks</p>
+<div class="log_logos text-2xl flex gap-5">
+    <i class="fa-brands fa-facebook-f login_logo"></i>
+    <i class="fa-brands fa-google-plus-g login_logo"></i>
+    <i class="fa-brands fa-instagram login_logo"></i>
+</div>
+<p>OR</p>
+<input class="inp_login w-1/3 px-2 py-1 rounded-md text-lg" type="text" name="login_username" id="inp_login1" placeholder="Enter Username">
+<p id="login_u_e" class="text-red-500 h-5 "></p>
+<div class="inp_pss relative  w-1/3">
+    <input class="inp_login w-full px-2 py-1 rounded-md text-lg " type="password" id="inp_login2" placeholder="Enter Password" name="login_password">
+    <i class="ss1 fa-solid fa-eye-slash absolute right-3 cursor-pointer top-3 " onclick="ss1()"></i>
+    <i class="hh1 fa-solid fa-eye absolute right-3 top-3 cursor-pointer" onclick="hh1()"></i>
+</div>
+
+<p id="login_p_e" class="text-red-500 h-5 "></p>
+<a href="/forgot" class="text-black font-medium">Forgot password</a>
+<button type="submit" class="login_btn p-2 bg-gray-500 w-1/3 rounded-md hover:bg-black text-white font-medium transition duration-1000 ease-in-out" >Sign in</button>
+</form>
+
+<div class="login_box2  pb-10 md:py-24 md:w-1/3 w-full flex gap-1 justify-center items-center flex-col px-8">
+<h2 class="text-3xl">New Here</h2>
+<p class="text-center">Sign up and discover a great amount of new opportunitiest</p>
+<a href="/sign_up"><button type="submit" class="login_btn2  bg-gray-500   p-2 md:pt-2 md:pb-3 w-1/3 md:w-auto px-4 rounded-md mt-2 hover:bg-black hover:text-white transition duration-1000 ease-in-out hover:border border-white">Sing up</button></a>
+</div>
+</div>
+
+
+<script>
+  
+
+    function form(){
+        var x=document.getElementsByClassName('inp_login')[0].value
+        var x1=document.getElementsByClassName('inp_login')[1].value
+        var y=document.getElementById('login_u_e')
+        var y1=document.getElementById('login_p_e')
+        var t1=1
+        var t=1
+       if(x==""){
+        y.innerText='Please enter username *'
+        var t= 0
+       }
+       else{
+        y.innerText=''
+        var t=1
+       }
+
+       if(x1==""){
+        y1.innerText="Please enter Password *"
+        var t1=0
+       }
+       else{
+        y1.innerText= ''
+        var t1=1
+       }
+
+       if(t==1 && t1==1){
+        return true
+       }
+       else{
+        return false
+       }
+
+    }
+
+
+    function ss1(){
+        var x=document.getElementsByClassName('ss1')[0]
+        var y=document.getElementsByClassName('hh1')[0]
+        var z=document.getElementById('inp_login2')
+        if(x.classList.contains('ss1')){
+            x.classList.add('hh1')
+            x.classList.remove('ss1')
+            y.classList.add('ss1')
+            y.classList.remove('hh1')
+        }
+        z.type='text'
+
+    }
+
+    function hh1(){
+        var x=document.getElementsByClassName('hh1')[0]
+        var y=document.getElementsByClassName('ss1')[0]
+        var z=document.getElementById('inp_login2')
+        if(x.classList.contains('hh1')){
+            x.classList.add('ss1')
+            x.classList.remove('hh1')
+            y.classList.add('hh1')
+            y.classList.remove('ss1')
+        }
+        z.type='password'
+    }
+
+</script>
+{% endblock %}
+

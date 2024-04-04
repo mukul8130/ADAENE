@@ -1,0 +1,47 @@
+<style>
+    .forgot_password form{
+        min-width: 500px;
+    }
+    @media screen and (max-width:550px) {
+        .forgot_password form{
+            min-width: auto;
+            width:100%;
+            padding:20px !important;
+        }
+        .forgot_password{
+            padding:100px 20px !important;
+        }
+    }
+
+    @media screen and (max-width:450px) {
+        .forgot_password form h1{
+            font-size: 20px;
+        }
+    }
+
+    @media screen and (max-width:250px) {
+        .forgot_password form h1{
+            font-size:16px;
+        }
+        .forgot_password  a p{
+            font-size:14px;
+        }
+    }
+</style>
+{% extends './base.html' %}
+
+{% block 'content' %}
+{% include './massages.html' %}
+<div class="forgot_password w-full flex justify-center items-center flex-col px-8 py-40 ">
+<form action="/reset/" method="post" class="w-1/2 bg-red-500 p-8 flex flex-col gap-3 rounded-md" style="background-color: #131212f5 !important; color: white;">
+{% csrf_token %}    
+    <h1 class="text-2xl font-medium">Reset Password</h1>
+    <input type="password" name="p1" id="" placeholder="Create Password" class="p-2 rounded-md text-black">
+    <input type="password" name="p2" id="" placeholder="Conferm Password" class="p-2 rounded-md text-black">
+    <a href="/login"><p class="text-right">Got Password ? Login</p></a>
+    <a href=""><button type="submit" class=" bg-gray-500 w-full py-2 border border-black hover:border-white hover:bg-black hover:text-white transition duration-1000 ease-in-out rounded-md" >Submit</button></a>
+</form>
+<a href="/sign_up" class="mt-5"><p>Don't have account ? sign up</p></a>
+</div>
+{% endblock %}
+

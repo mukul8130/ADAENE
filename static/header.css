@@ -1,0 +1,72 @@
+@media screen and (max-width:1024px) {
+    header nav  ul{
+        position:fixed;
+        margin: 0px !important;
+        height: 100vh;
+        width: 100%;
+        top: 0%;
+        left: 0%;
+        transition: all 0.6s ease-in-out;
+        z-index: 10;
+        flex-direction:column;
+        align-items: center !important;
+        font-size: 25px !important;       
+        background-color: black;
+    }
+    .hide{
+        transform: translateY(-200%);
+    }
+    .show{
+        transform: translateY(0%);
+        transition: all 0.6s ease-in-out;
+    }
+    header nav ul .li ol {
+        left:-66px;
+        padding-top: 10px;
+        gap: 20px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    header nav ul .li:hover ol{
+        display:flex;
+    }
+}
+
+@media screen and (max-width:550px) {
+    header nav{
+        width: 100% ;
+        margin-top: 10px;
+        justify-content: space-between !important;
+    }
+    .cart span{
+        bottom: 16px;
+        right: -11px;
+        color: white;
+    }
+    header .logo span{
+        font-size: x-large;
+    }
+    header .logo{
+        width:100%;
+        text-align: center !important;
+    }
+    header{
+        padding:20px !important;
+    }
+}
+
+header{
+    background-color: black;
+}
+header  form input{
+    background-color: black;
+}
+header nav ul li ol {
+    right: -36px !important;
+}
+
+.active{
+    color: white !important;
+}
+

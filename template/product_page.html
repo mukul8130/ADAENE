@@ -1,0 +1,250 @@
+<link rel="stylesheet" href="/static/jquery.exzoom.css" />
+<style>
+  .product_page .pp_b {
+    width: 50%;
+    /* background-color: red; */
+  }
+  .product_page #exzoom {
+    width: 400px;
+    min-width: 400px;
+  }
+  .product_page .pp_data {
+    width: 65%;
+    border-left: 1px solid wheat;
+    padding-left: 20px;
+    padding-top: 20px;
+  }
+  .product_page .add_btn {
+    opacity: 0;
+    transition: all 0.6s ease-in-out;
+  }
+  .product_page .minus_btn {
+    opacity: 0;
+    transition: all 0.6s ease-in-out;
+  }
+  .product_page .quantity:hover .add_btn {
+    opacity: 1;
+    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+  }
+  .product_page .quantity:hover .minus_btn {
+    opacity: 1;
+    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+  }
+  header {
+    background-color: #131212f5 !important;
+  }
+  footer {
+    background-color: #131212f5 !important;
+  }
+  header form input {
+    background-color: transparent !important ;
+  }
+
+  header form .sr_icon {
+    background-color: #131212f5 !important;
+  }
+
+  .product_page .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 8px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .product_page .active,
+  .accordion:hover {
+    background-color: #ccc;
+  }
+
+  /* Style the accordion panel. Note: hidden by default */
+  .product_page .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+
+  .product_page .pp_b1{
+    display: none;
+  }
+
+  @media screen and (max-width: 850px) {
+    .product_page {
+      flex-wrap: wrap;
+      gap:25px !important;
+
+    }
+    .product_page .pp_data {
+      width: 100%;
+      border-left: none;
+      padding-left: 0px;
+      padding-top: 0px;
+    }
+    
+    .product_page .pp_b {
+      width: 100%;
+      display: none;
+    }
+    .product_page .pp_b1{
+      display: flex;
+      border-top: 1px solid gray;
+    }
+    .product_page .pp_b1 img{
+      min-width: 250px;
+      border-bottom: 1px solid gray;
+    }
+  }
+
+  @media screen and (max-width:550px) {
+    .product_page{
+      padding:50px 20px !important; 
+    }
+  }
+
+  @media screen and (max-width:350px) {
+    .product_page .pp_b1{
+      border-top:none;
+      
+    }
+    .product_page .pp_b1 img{
+      /* border-top: 1px solid gray; */
+      width: 100%;
+      min-width: auto;
+      border-bottom: none;
+    }
+    .product_page .pp_b1{
+      /* min-width: 250px; */
+      display: flex;
+      border-top: 1px solid gray;
+      border-bottom: 1px solid gray;
+    }
+  }
+</style>
+{% extends './base.html' %} {% block 'content' %}
+
+<div class="product_page p-8 py-16 flex w-full bg-black justify-between gap-20">
+  <div class="pp_b">
+    <div class="exzoom " id="exzoom">
+      <!-- Images -->
+      <div class="exzoom_img_box ">
+        <ul class="exzoom_img_ul ">
+          <li><img class="img " src="{{z.image.url}}" /></li>
+          {% for i in y %}
+          <li><img src="{{i.image.url}}" /></li>
+          <!-- <li><img src="/media/pro_img/pro6.webp" /></li> -->
+          <!-- <li><img src="/media/pro_img/pro11.webp" /></li> -->
+          <!-- <li><img src="/media/pro_img/pro16.webp" /></li> -->
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- <a href="https://www.jqueryscript.net/tags.php?/Thumbnail/">Thumbnail</a> Nav-->
+      <div class="exzoom_nav"></div>
+    </div>
+  </div>
+
+  <div class="pp_b1 w-full flex justify-center">
+    <img src="{{z.image.url}}" class="w-1/2" alt="">
+  </div>
+
+  <form method="post" action="/Add_to_cart/{{z.id}}" class="pp_data flex flex-col gap-3">
+  {% csrf_token %}
+    <h2 class="text-3xl text-white">{{z.product_name}}</h2>
+    <p class="text-white text-xl font-mono"><b>$</b> {{z.price}}</p>
+
+    <b class="text-white">Choose Color</b>
+    
+    <select name="color" id="" class="font-mono" style="width: 100px;">  
+    {% for i in color %}
+      <option value="{{i.variation_value}}" >{{i.variation_value | title}}</option>
+    {% endfor %}
+    </select>
+
+    {% if size %}
+    <b class="text-white">Select Size</b>
+    <select name="size" id="" class="font-mono" style="width: 100px;">
+    {% for i in size %}
+      <option value="{{i.variation_value}}">{{i.variation_value | title}}</option>
+    {% endfor %}
+    </select>
+    {% endif %}
+    <b class="text-white">Quantity</b>
+    <div class="quantity relative w-16 my-2">
+      <input  class="text-black p-2 pl-4 bg-white text-xl font-mono w-16" id="quan" value="1" name="quan"></input>
+      <div class="add_btn">
+        <i class="fa-solid fa-chevron-up absolute top-1 right-2" onclick="plus_qnt()"></i>
+      </div>
+      <div class="minus_btn">
+        <i class="fa-solid fa-chevron-down absolute bottom-1 right-2" onclick="minus_qnt()"></i>
+      </div>
+    </div>
+    <button type="button" class="accordion flex justify-between">
+      PRODUCT INFO <i class="fa-solid fa-angle-down"></i>
+    </button>
+    <div class="panel ">
+      <p class="text-black py-2">{{z.discription}}</p>
+    </div>
+
+    <a href=""
+      ><button type="submit" class="bg-white w-full hover:bg-black hover:text-white border-2 border-gray-500 transition duration-500 ease-in-out  p-2 text-gray-500 text-xl">
+        Add to Cart
+      </button></a
+    >
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="/static/jquery.exzoom.js"></script>
+<script>
+  $(function () {
+    $("#exzoom").exzoom({
+      autoPlay: false,
+    });
+  });
+
+
+  document.querySelectorAll(".accordion").forEach(function (element) {
+    element.addEventListener("click", function (e) {
+      x = document.querySelector(".active");
+      e.target.classList.add("active");
+      e.target.nextElementSibling.style.maxHeight = `${e.target.nextElementSibling.scrollHeight}px`;
+      if (x) {
+        x.classList.remove("active");
+        x.nextElementSibling.style.maxHeight = 0;
+      }
+    });
+  });
+
+  c=1
+  function plus_qnt(){
+    var stock_value={{stock}};
+    if(c<stock_value){
+      var x=document.getElementById('quan').value
+      c=c+1
+      var y=document.getElementById('quan').value=c
+    }
+  }
+
+function minus_qnt(){
+    c1=c
+    var x=document.getElementById('quan').value
+    if(c1>1){
+      c1=c1-1
+      c=c1
+      var y=document.getElementById('quan').value=c1
+    }
+}
+  
+
+</script>
+
+{% endblock %}

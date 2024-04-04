@@ -1,0 +1,177 @@
+<style>
+    .cart .cart_b{
+        border: 1px solid gray;
+        width: 20%;
+    }
+    .cart .cart_b1{
+        width: 40%;
+    }
+    .cart1 .cart_pb{
+        width: 20%;
+    }
+    .cart1 .cart_pb1{
+        width: 40%;
+    }
+
+    @media screen and (max-width:768px) {
+        .cart_mobile .img{
+            width: 30%;
+            min-width:170px;
+        }
+    }
+     
+    @media screen and (max-width:550px) {
+        .ch1{
+            font-size: 33px !important;
+        }
+        .cart_mobile{
+            padding:30px 20px !important;
+        }
+        .cart_price{
+            padding: 20px !important;
+        } 
+    } 
+
+    @media screen and (max-width:450px) {
+        .cart_mobile{
+            flex-wrap: wrap;
+        }
+        .cart_mobile .img{
+            width:100%;
+            min-width: auto;
+            display: flex;
+            justify-content: center;
+        }
+        .cart_mobile .img img{
+            width: 80%;
+        }
+        .cart_mobile .cart_md{
+            width: 100%;
+
+        }
+        .m_delete{
+            display: none;
+        }
+        .cart_remove_btn{
+            display: block !important;
+            border-radius:5px;
+        }
+        .empty_cart{
+            font-size: 25px !important;
+        }
+    }
+
+    @media screen and (max-width:300px) {
+        .cart_mobile .img img{
+            width:100%;
+        }
+        .empty_cart .con_shop{
+            font-size:16px;
+            padding:7px !important;
+        }
+    }
+</style>
+{% extends './base.html' %}
+
+
+{% block 'content'  %}
+{% include './massages.html' %}
+<h1 class="font-mono text-center text-4xl py-8 md:pt-8 md:pb-0 ch1 border border-gray-500 md:border-none">Cart</h1>
+<div class="cart hidden text-center font-mono text-lg py-8 md:flex">
+    <div class="cart_b cart_b1 py-1">PRODUCT</div>
+    <div class="cart_b py-1">PRICE</div>
+    <div class="cart_b py-1">QUANTITY</div>
+    <div class="cart_b py-1">TOTAL</div>
+</div>
+
+{% if user.id %}
+
+{% if cart_item %}
+
+{% for i in cart_item %}
+
+<div class="cart1 hidden md:flex pb-8 px-8">
+    <div class="cart_pb cart_pb1 flex  items-start gap-4">
+        <a href="/remove_btn/{{i.id}}" class="delete1 hover:text-red-500"><i class="fa-solid fa-xmark"></i></a>
+        <!-- <a href="" class="delete2"><i class="fa-regular fa-trash-can"></i></a> -->
+        <div class="img w-1/4 min-w-28 ">
+            <img class="w-full rounded-md" src="{{i.pt.image.url}}"  alt="">
+        </div>
+        <div class="cart_box flex flex-col">
+        <p>{{i.pt.product_name}}</p>
+        {% if i.vt.all %}
+                {% for x in i.vt.all %}
+                  <p class="">{{x.variation_category | title}} : {{x.variation_value | title}}</p>
+                {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+
+    <div class="cart_pb text-center"><p>$ {{i.pt.price}}</p></div>
+
+    <div class="cart_pb flex justify-center items-start">
+        <a href="/minus_btn/{{i.id}}" class="p-1 px-2 border  border-black border-r-0 hover:bg-black hover:text-white transition-all duration-500 ease-in-out"><i class="fa-solid fa-minus"></i></a>
+        <p class="px-2  border border-black border-r-0">{{i.q}}</p>
+        <a href="/plus_btn/{{i.id}}" class="p-1 px-2 border border-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out"><i class="fa-solid fa-plus"></i></a>
+    </div>
+
+    <div class="cart_pb text-center"><p>$ {{i.get_total}}</p></div>
+</div>
+
+
+
+
+
+
+<div class="cart_mobile flex  gap-4 md:hidden px-8 py-8 border-t border-gray-500">
+   <div class="img">
+    <img class="rounded-md" src="{{i.pt.image.url}}" alt="">
+   </div>
+   <div class="cart_md flex flex-col gap-2">
+    <p class="font-medium">{{i.pt.product_name}}</p>
+   
+    {% if i.vt.all %}
+        {% for x in i.vt.all %}
+            <p>{{x.variation_category | title}} : {{x.variation_value | title}}</p>
+        {% endfor %}
+    {% endif %}
+
+   <p>$ {{i.pt.price}}</p>
+   <p>$ {{i.get_total}}</p>
+
+   <div class="cart_pb flex  items-start">
+    <a href="/minus_btn/{{i.id}}" class="p-1 px-2 border  border-black border-r-0 hover:bg-black hover:text-white transition-all duration-500 ease-in-out"><i class="fa-solid fa-minus"></i></a>
+    <p class="px-2  border border-black border-r-0">{{i.q}}</p>
+    <a href="/plus_btn/{{i.id}}" class="p-1 px-2 border border-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out"><i class="fa-solid fa-plus"></i></a>
+</div>
+
+<a href="/remove_btn/{{i.id}}" class="bg-black text-white text-center p-1 pb-2 mt-2 cart_remove_btn hidden"><button>Remove</button></a>
+   </div>
+
+   <a href="/remove_btn/{{i.id}}" class="ml-auto font-mono text-xl m_delete"><i class="fa-solid fa-xmark"></i></a>
+</div>
+
+
+{% endfor %}
+
+{% else %}
+<h1 class="empty_cart text-center text-3xl font-mono py-20 sm:py-20 lg:py-48" style="padding-left: 20px; padding-right: 20px;">Your Cart Is Empty <br> <br> <a href="/shop" class="con_shop text-xl bg-gray-500 text-black hover:bg-black  hover:text-white transition-all duration-500 ease-in-out rounded-md px-3 pt-2 pb-3">Continue Shopping</a></h1>
+
+{% endif %}
+
+
+<div class="cart_price px-8 py-5 flex justify-center border-t">
+    <div class="cart_p w-full  py-4 flex flex-col gap-2">
+    <span class="flex justify-between border-b border-gray-400"><h3>Total Price :</h3><h3> $ {{total}}</h3></span>
+    <span class="flex justify-between border-b border-gray-400"><h3>Tax : </h3> <h3> $ {{tax}}</h3></span>
+    <span class="flex justify-between border-b border-gray-400"><h3>Grand Total : </h3> <h3> $ {{grand_total}}</h3></span>
+    </div>
+</div>
+
+{% else %}
+<h1 class="empty_cart text-center text-3xl font-mono py-20 sm:py-20 lg:py-48" style="padding-left: 20px; padding-right: 20px;">Please Login And Add Items <br> <br> <a href="/login" class=" text-2xl bg-gray-500 text-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out rounded-md pb-3 pt-2 px-3">Login</a></h1>
+
+
+{% endif %}
+{% endblock %}
+
